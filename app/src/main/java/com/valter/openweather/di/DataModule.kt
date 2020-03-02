@@ -10,6 +10,7 @@ import com.valter.openweather.data.repository.OpenWeatherRepositoryImpl
 import com.valter.openweather.dispatchers.AppDispatchersContainer
 import com.valter.openweather.dispatchers.DispatchersContainer
 import com.valter.openweather.network.*
+import com.valter.openweather.ui.main.MainViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
@@ -32,7 +33,7 @@ object DataModule {
         single { provideApiService(get()) }
         single<DispatchersContainer> { AppDispatchersContainer() }
         single<OpenWeatherRepository> { OpenWeatherRepositoryImpl(get(), get(), get(), get()) }
-//        viewModel { MainViewModel(get(), get()) }
+        viewModel { MainViewModel(get(), get()) }
     }
 }
 

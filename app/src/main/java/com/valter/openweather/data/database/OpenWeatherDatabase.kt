@@ -5,10 +5,11 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.valter.openweather.data.converters.ForecastListTypeConverter
 import com.valter.openweather.data.converters.WeatherListTypeConverter
+import com.valter.openweather.data.database.entity.forecast.Forecast
 import com.valter.openweather.data.database.entity.weather.CurrentWeatherData
 
 @Database(
-        entities = [CurrentWeatherData::class],
+        entities = [CurrentWeatherData::class, Forecast::class],
         version = 1
 )
 

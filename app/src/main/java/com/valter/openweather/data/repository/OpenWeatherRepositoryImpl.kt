@@ -23,8 +23,8 @@ class OpenWeatherRepositoryImpl(
         fetchCurrentWeatherFromDatabase()
     }
 
-    override suspend fun getForecast() = if (appContext.isConnectedToNetwork()) {
-        fetchForecastFromNetwork()
+    override suspend fun getForecast(city: String) = if (appContext.isConnectedToNetwork()) {
+        fetchForecastFromNetwork(city)
     } else {
         fetchForecastWeatherFromDatabase()
     }
@@ -33,7 +33,7 @@ class OpenWeatherRepositoryImpl(
         persistCurrentWeather(it)
     }
 
-    private suspend fun fetchForecastFromNetwork() = openWeatherService.fetchForecast("Lisbon", "metric").list.also {
+    private suspend fun fetchForecastFromNetwork(city: String) = openWeatherService.fetchForecast(city, "metric").list.also {
         persistForecastWeather(it)
     }
 

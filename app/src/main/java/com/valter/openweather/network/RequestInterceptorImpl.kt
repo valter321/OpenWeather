@@ -9,7 +9,7 @@ class RequestInterceptorImpl : RequestInterceptor {
         val url = chain.request()
                 .url
                 .newBuilder()
-                .addQueryParameter("apikey", BuildConfig.API_KEY)
+                .addQueryParameter("appid", BuildConfig.API_KEY)
                 .build()
 
         val request = chain.request()
