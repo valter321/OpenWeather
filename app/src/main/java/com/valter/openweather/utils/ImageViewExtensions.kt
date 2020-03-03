@@ -24,7 +24,7 @@ fun String.getWeatherImage() : String {
 
         "01n" -> "https://i.pinimg.com/originals/db/78/5c/db785c75f2cbbf85af41bcc3578d994d.jpg"
         "02n" -> "https://zaaranzowani.pl/wp-content/uploads/fotolia_91343272.jpg"
-        "03n" -> "https://images.unsplash.com/photo-1479156661942-92cd989cdb56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+        "03n" -> "https://ak0.picdn.net/shutterstock/videos/12703460/thumb/1.jpg"
         "04n" -> "https://live.staticflickr.com/7154/6769034555_ecb8fdbb4a_b.jpg"
         "09n" -> "https://i.pinimg.com/originals/fa/a0/e9/faa0e93a60455e42d8d1e7765581f8be.jpg"
         "10n" -> "https://i.pinimg.com/originals/fa/a0/e9/faa0e93a60455e42d8d1e7765581f8be.jpg"
