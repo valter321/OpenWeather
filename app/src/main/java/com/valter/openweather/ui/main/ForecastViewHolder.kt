@@ -17,13 +17,16 @@ class ForecastViewHolder(
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
     fun bind(forecast: Forecast) {
         with(forecast) {
-            Glide.with(containerView.context)
-                    .load(weather[0].icon.buildIconUrl())
-                    .centerCrop()
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(imgIcon)
+            weather?.let {
+                Glide.with(containerView.context)
+                        .load(weather[0].icon.buildIconUrl())
+                        .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(imgIcon)
+            }
 
-            txtTemperature.text = containerView.context.getString(R.string.temperature, main.temp?.toInt())
+
+            txtTemperature.text = containerView.context.getString(R.string.temperature, main?.temp?.toInt())
             txtHour.text = date?.substring(11, 13) ?: ""
         }
     }

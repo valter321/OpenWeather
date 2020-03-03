@@ -54,7 +54,7 @@ class MainViewModel(
                 loading = true,
                 context = dispatchersContainer.IO
         ) {
-            repository.getForecast(CURRENT_WEATHER_CITY)
+            repository.getCurrentForecast(CURRENT_WEATHER_CITY)
         }
     }
 

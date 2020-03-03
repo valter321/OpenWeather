@@ -89,19 +89,22 @@ class MainFragment : BaseFragment() {
 
     private fun setCurrentWeatherData(currentWeatherData: CurrentWeatherData) {
         showContent()
-        with(currentWeatherData) {
-            txtTemperature.text = getString(R.string.temperature, main.temp.toInt())
-            Glide.with(context!!)
-                    .load(weather[0].icon.buildIconUrl())
-                    .centerCrop()
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(imgIcon)
-            Glide.with(context!!)
-                    .load(weather[0].icon.getWeatherImage())
-                    .centerCrop()
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(imgWeather)
+        currentWeatherData?.let {
+            with(it) {
+                txtTemperature.text = getString(R.string.temperature, main.temp.toInt())
+                Glide.with(context!!)
+                        .load(weather[0].icon.buildIconUrl())
+                        .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(imgIcon)
+                Glide.with(context!!)
+                        .load(weather[0].icon.getWeatherImage())
+                        .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(imgWeather)
+            }
         }
+
     }
 
     private fun setChartForecast(data: List<Forecast>) {
@@ -121,7 +124,7 @@ class MainFragment : BaseFragment() {
         val entries = arrayListOf<Entry>()
         list.forEach { forecast ->
             val hour = forecast.date?.substring(11, 13)
-            forecast.main.temp?.let {
+            forecast.main?.temp?.let {
                 entries.add(Entry(hour!!.toFloat(), it.toFloat()))
             }
         }

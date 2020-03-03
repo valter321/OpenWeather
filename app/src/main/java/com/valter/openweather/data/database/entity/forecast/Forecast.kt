@@ -11,11 +11,12 @@ import com.valter.openweather.data.database.entity.Weather
 @Entity(tableName = "forecast_weather")
 @JsonClass(generateAdapter = true)
 data class Forecast(
-        @PrimaryKey(autoGenerate = true)
-        val id: Int? = null,
         @Embedded
-        val main: ForecastData,
+        val main: ForecastData?,
         val weather: List<Weather>,
         @Json(name = "dt_txt")
         val date: String?
-)
+) {
+        @PrimaryKey(autoGenerate = true)
+        var id: Int? = null
+}

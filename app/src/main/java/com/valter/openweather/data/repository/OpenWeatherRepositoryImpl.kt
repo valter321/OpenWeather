@@ -6,6 +6,7 @@ import com.valter.openweather.data.database.ForecastWeatherDao
 import com.valter.openweather.data.database.entity.forecast.Forecast
 import com.valter.openweather.data.database.entity.weather.CurrentWeatherData
 import com.valter.openweather.network.OpenWeatherService
+import com.valter.openweather.utils.NoConnectivityException
 import com.valter.openweather.utils.isConnectedToNetwork
 
 class OpenWeatherRepositoryImpl(
@@ -20,7 +21,13 @@ class OpenWeatherRepositoryImpl(
     override suspend fun getCurrentWeather(city: String) = if (appContext.isConnectedToNetwork()) {
         fetchCurrentWeatherFromNetwork(city)
     } else {
-        fetchCurrentWeatherFromDatabase()
+        fetchCurrentWeatherFromDatabase() ?: throw NoConnectivityException()
+    }
+
+    override suspend fun getCurrentForecast(city: String) = if (appContext.isConnectedToNetwork()) {
+        fetchForecastFromNetwork(city)
+    } else {
+        fetchForecastWeatherFromDatabase()
     }
 
     override suspend fun getForecast(city: String) = if (appContext.isConnectedToNetwork()) {
@@ -37,7 +44,7 @@ class OpenWeatherRepositoryImpl(
         persistForecastWeather(it)
     }
 
-    private suspend fun fetchCurrentWeatherFromDatabase() = currentWeatherDao.getCurrentWeather()
+    private suspend fun fetchCurrentWeatherFromDatabase() : CurrentWeatherData? = currentWeatherDao.getCurrentWeather()
 
     private suspend fun fetchForecastWeatherFromDatabase() = forecastWeatherDao.getForecast()
 
