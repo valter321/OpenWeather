@@ -7,17 +7,19 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.github.mikephil.charting.components.LimitLine
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import com.valter.openweather.R
 import com.valter.openweather.data.database.entity.forecast.Forecast
 import com.valter.openweather.data.database.entity.weather.CurrentWeatherData
 import com.valter.openweather.data.model.ErrorData
 import com.valter.openweather.ui.components.BaseFragment
 import com.valter.openweather.ui.components.ForecastView
-import com.valter.openweather.utils.Outcome
-import com.valter.openweather.utils.buildIconUrl
-import com.valter.openweather.utils.getWeatherImage
+import com.valter.openweather.utils.*
 import kotlinx.android.synthetic.main.main_fragment.*
-import lecho.lib.hellocharts.model.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
@@ -116,55 +118,34 @@ class MainFragment : BaseFragment() {
     }
 
     private fun createDotChart(list: List<Forecast>) {
-
-        val yAxisData = mutableListOf(22.5, 20.0, 17.5, 15.0, 12.5)
-
-        val values: MutableList<PointValue> = ArrayList()
+        val entries = arrayListOf<Entry>()
         list.forEach { forecast ->
             val hour = forecast.date?.substring(11, 13)
             forecast.main.temp?.let {
-                values.add(PointValue(hour!!.toFloat(), it.toFloat()))
+                entries.add(Entry(hour!!.toFloat(), it.toFloat()))
             }
         }
 
-//        values.add(PointValue(0f, 2f))
-//        values.add(PointValue(1f, 4f))
-//        values.add(PointValue(2f, 3f))
-//        values.add(PointValue(3f, 4f))
+        val blue = ContextCompat.getColor(context!!, R.color.blue)
+        val dataSet = LineDataSet(entries, "Label").styleChartLine(blue)
 
-        val yAxisValues = mutableListOf<AxisValue>()
-
-        for (i in 0 until yAxisData.size) {
-            yAxisValues.add(i, AxisValue(i.toFloat()).setLabel(yAxisData[i].toString()))
+        val lineData = LineData(dataSet)
+        with(chart) {
+            data = lineData
+            styleChart(blue, getString(R.string.temperature_text))
         }
-
-        val line = Line(values).apply {
-            color = ContextCompat.getColor(context!!, R.color.blue)
-            isCubic = true
-        }
-
-        val lines = mutableListOf<Line>()
-        lines.add(line)
-
-        val data = LineChartData()
-        data.lines = lines
-
-        chart.lineChartData = data
-
-        val yAxis = Axis()
-        yAxis.values = yAxisValues
-        data.axisYRight = yAxis
     }
 
+    // Pass forecast data to ForecastView
     private fun setForecast(data: List<Forecast>) {
         val calendar = Calendar.getInstance()
-
         for (i in 0 until forecastViewList.size) {
             val currentDayForecast = mutableListOf<Forecast>()
             val dayIncrement = if (i == 0) 0 else 1
             calendar.add(Calendar.DAY_OF_YEAR, dayIncrement)
             val date = SimpleDateFormat("EEEE, MMM dd", Locale.getDefault()).format(calendar.time)
             val day = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
+
             data.forEach { forecast ->
                 forecast.date?.let {
                     if(it.contains(day)) {
@@ -175,7 +156,6 @@ class MainFragment : BaseFragment() {
 
             forecastViewList[i].setData(date, currentDayForecast.toMutableList())
             currentDayForecast.clear()
-
         }
     }
 

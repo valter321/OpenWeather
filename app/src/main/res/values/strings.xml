@@ -3,5 +3,6 @@
     <string name="retry">RETRY</string>
     <string name="error_message">Something went wrong</string>
     <string name="temperature">%d°</string>
+    <string name="temperature_text">Temperature</string>
     <string name="now_label">It is now</string>
 </resources>

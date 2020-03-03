@@ -48,4 +48,6 @@ ext {
     koinVersion = "2.0.1"
     robolectricVersion = "4.1"
     liveDataTestingVersion = "1.1.1"
+
+    dotChart = "v3.1.0"
 }

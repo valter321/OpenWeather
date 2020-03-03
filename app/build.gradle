@@ -87,7 +87,8 @@ dependencies {
     // Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
 
-    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+    // Dot Chart
+    implementation "com.github.PhilJay:MPAndroidChart:$dotChart"
 
     testImplementation "junit:junit:$junit4Version"
     testImplementation "androidx.arch.core:core-testing:$coreTesting"
