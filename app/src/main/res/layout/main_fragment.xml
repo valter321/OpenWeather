@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="16dp">
+        android:paddingBottom="@dimen/md_margin_padding_medium">
 
         <ImageView
             android:id="@+id/imgWeather"
@@ -21,9 +21,9 @@
 
         <ImageView
             android:id="@+id/imgIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="20dp"
+            android:layout_width="@dimen/md_margin_padding_xxxlarge"
+            android:layout_height="@dimen/md_margin_padding_xxxlarge"
+            android:layout_margin="@dimen/horizontal_padding"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
@@ -31,9 +31,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="10dp"
-            android:text="It is now"
+            android:layout_marginTop="@dimen/md_margin_padding_large"
+            android:layout_marginEnd="@dimen/md_margin_padding_small"
+            android:text="@string/now_label"
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@id/txtTemperature"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,9 +43,9 @@
             android:id="@+id/txtTemperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/horizontal_padding"
             android:textColor="@color/white"
-            android:textSize="40dp"
+            android:textSize="@dimen/big_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="17"
@@ -55,46 +55,46 @@
             android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="225dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginHorizontal="@dimen/md_margin_padding_medium"
+            android:layout_marginTop="@dimen/md_margin_padding_xhuge"
             android:background="@drawable/rounded_corners"
-            android:elevation="6dp"
+            android:elevation="@dimen/elevation"
             app:layout_constraintTop_toBottomOf="@id/imgIcon"
-            android:padding="4dp"/>
+            android:padding="@dimen/md_margin_padding_half"/>
 
         <com.valter.openweather.ui.components.ForecastView
             android:id="@+id/vwForecastOne"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/md_margin_padding_medium"
             app:layout_constraintTop_toBottomOf="@id/chart" />
 
         <com.valter.openweather.ui.components.ForecastView
             android:id="@+id/vwForecastTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/md_margin_padding_medium"
             app:layout_constraintTop_toBottomOf="@id/vwForecastOne" />
 
         <com.valter.openweather.ui.components.ForecastView
             android:id="@+id/vwForecastThree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/md_margin_padding_medium"
             app:layout_constraintTop_toBottomOf="@id/vwForecastTwo" />
 
         <com.valter.openweather.ui.components.ForecastView
             android:id="@+id/vwForecastFour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/md_margin_padding_medium"
             app:layout_constraintTop_toBottomOf="@id/vwForecastThree" />
 
         <com.valter.openweather.ui.components.ForecastView
             android:id="@+id/vwForecastFive"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/md_margin_padding_medium"
             app:layout_constraintTop_toBottomOf="@id/vwForecastFour" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

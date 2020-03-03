@@ -17,8 +17,8 @@ class OpenWeatherRepositoryImpl(
 
     private val appContext = context.applicationContext
 
-    override suspend fun getCurrentWeather() = if (appContext.isConnectedToNetwork()) {
-        fetchCurrentWeatherFromNetwork()
+    override suspend fun getCurrentWeather(city: String) = if (appContext.isConnectedToNetwork()) {
+        fetchCurrentWeatherFromNetwork(city)
     } else {
         fetchCurrentWeatherFromDatabase()
     }
@@ -29,7 +29,7 @@ class OpenWeatherRepositoryImpl(
         fetchForecastWeatherFromDatabase()
     }
 
-    private suspend fun fetchCurrentWeatherFromNetwork() = openWeatherService.fetchCurrentWeather("Lisbon", "metric").also {
+    private suspend fun fetchCurrentWeatherFromNetwork(city: String) = openWeatherService.fetchCurrentWeather(city, "metric").also {
         persistCurrentWeather(it)
     }
 

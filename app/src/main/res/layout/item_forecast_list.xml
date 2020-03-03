@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/imgIcon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/md_margin_padding_xxxlarge"
+        android:layout_height="@dimen/md_margin_padding_xxxlarge"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
@@ -27,8 +27,8 @@
         android:id="@+id/txtHour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:textSize="10sp"
+        android:layout_marginStart="@dimen/md_margin_padding_min"
+        android:textSize="@dimen/icon_text_size"
         app:layout_constraintStart_toStartOf="@id/txtTemperature"
         app:layout_constraintTop_toBottomOf="@id/txtTemperature"
         tools:text="01" />
