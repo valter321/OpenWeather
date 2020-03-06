@@ -41,6 +41,12 @@ class MainFragment : BaseFragment() {
 
         viewModel.retry()
 
+        observeCurrentWeather()
+        observeChartForecast()
+        observePortoForecast()
+    }
+
+    private fun observeCurrentWeather() {
         viewModel.currentWeatherData.observe(viewLifecycleOwner, Observer { outcome ->
             when (outcome) {
                 is Outcome.Progress -> showLoading()
@@ -53,7 +59,9 @@ class MainFragment : BaseFragment() {
                 )
             }
         })
+    }
 
+    private fun observeChartForecast() {
         viewModel.chartForecasts.observe(viewLifecycleOwner, Observer { outcome ->
             when (outcome) {
                 is Outcome.Progress -> showLoading()
@@ -66,7 +74,9 @@ class MainFragment : BaseFragment() {
                 )
             }
         })
+    }
 
+    private fun observePortoForecast() {
         viewModel.forecasts.observe(viewLifecycleOwner, Observer { outcome ->
             when (outcome) {
                 is Outcome.Progress -> showLoading()
@@ -89,20 +99,18 @@ class MainFragment : BaseFragment() {
 
     private fun setCurrentWeatherData(currentWeatherData: CurrentWeatherData) {
         showContent()
-        currentWeatherData?.let {
-            with(it) {
-                txtTemperature.text = getString(R.string.temperature, main.temp.toInt())
-                Glide.with(context!!)
-                        .load(weather[0].icon.buildIconUrl())
-                        .centerCrop()
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(imgIcon)
-                Glide.with(context!!)
-                        .load(weather[0].icon.getWeatherImage())
-                        .centerCrop()
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .into(imgWeather)
-            }
+        with(currentWeatherData) {
+            txtTemperature.text = getString(R.string.temperature, main.temp.toInt())
+            Glide.with(context!!)
+                    .load(weather[0].icon.buildIconUrl())
+                    .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(imgIcon)
+            Glide.with(context!!)
+                    .load(weather[0].icon.getWeatherImage())
+                    .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(imgWeather)
         }
 
     }
